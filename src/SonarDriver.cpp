@@ -29,14 +29,15 @@ SonarDriver::SonarDriver(const IoServicePtr& service,
 
 bool SonarDriver::send_ping_config(PingConfig config)
 {
-    config.head.oculusId    = OCULUS_CHECK_ID;
-    config.head.msgId       = messageSimpleFire;
-    config.head.srcDeviceId = 0;
-    config.head.dstDeviceId = sonarId_;
-    config.head.payloadSize = sizeof(PingConfig) - sizeof(OculusMessageHeader);
+    /* THESE CONFIGS DOESN'T WORK FOR M750D AND WILL TURN THE DEVICE OFF. ONLY FOR M1200D!*/
+    //config.head.oculusId    = OCULUS_CHECK_ID;
+    //config.head.msgId       = messageSimpleFire;
+    //config.head.srcDeviceId = 0;
+    //config.head.dstDeviceId = sonarId_;
+    //config.head.payloadSize = sizeof(PingConfig) - sizeof(OculusMessageHeader);
 
     // Other non runtime-configurable parameters (TODO : make then launch parameters)
-    config.networkSpeed = 0xff;
+    // config.networkSpeed = 0xff;
 
     boost::asio::streambuf buf;
     buf.sputn(reinterpret_cast<const char*>(&config), sizeof(config));
